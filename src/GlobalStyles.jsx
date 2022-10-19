@@ -3,6 +3,8 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
     *{
         --blue: rgba(82, 182, 255, 1);
+        --darkBlue:rgba(18, 107, 165, 1);
+;
 
         @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Playball&display=swap');
 
