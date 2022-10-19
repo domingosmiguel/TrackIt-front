@@ -12,6 +12,7 @@ const ButtonStyle = styled.button`
     width: 100%;
     height: 45px;
     margin: 3px 0;
+    color: white;
     background-color: var(--blue);
     border: none;
     cursor: pointer;

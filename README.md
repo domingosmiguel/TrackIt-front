@@ -4,11 +4,10 @@ The goal...
 
 ## **Exercised Contents**:
 
-<!-- -   React Hooks (useState, useEffect) -->
-
--   React Router (Link)
+-   React Hooks (useState)
+-   React Router (Link, useNavigate)
 -   Styled components (GlobalStyles)
-<!-- -   API integration -->
+-   API integration
 
 ## **Results**:
 

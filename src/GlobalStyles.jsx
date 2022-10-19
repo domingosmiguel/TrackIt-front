@@ -4,10 +4,12 @@ const GlobalStyles = createGlobalStyle`
     *{
         --blue: rgba(82, 182, 255, 1);
 
-        
+        @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Playball&display=swap');
+
         box-sizing: border-box;
         cursor: default;
-        font-family: 'Roboto', sans-serif;
+        /* font-family: 'Playball', cursive; */
+        font-family: 'Lexend Deca', sans-serif;
 	    font-weight: 400;
         
         ::-webkit-scrollbar {

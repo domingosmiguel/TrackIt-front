@@ -1,7 +1,15 @@
 import styled from "styled-components";
 
-export default function StyledInput({ type }) {
-    return <InputStyle type={type} />;
+export default function StyledInput({ name, type, value, onChange, placeHolder }) {
+    return (
+        <InputStyle
+            name={name}
+            type={type}
+            value={value}
+            onChange={onChange}
+            placeholder={placeHolder}
+        />
+    );
 }
 
 const InputStyle = styled.input`

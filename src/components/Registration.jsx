@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 
 import trackItLogo from "../images/trackit.PNG";
@@ -6,19 +8,59 @@ import StyledButton from "./StyledButton";
 import StyledInput from "./StyledInput";
 
 export default function Registration() {
+    const navigate = useNavigate();
+    const [register, setRegister] = useState({
+        email: "",
+        name: "",
+        image: "",
+        password: "",
+    });
+
+    function handleForm(e) {
+        setRegister({ ...register, [e.target.name]: e.target.value });
+    }
     function handleButtonClick(e) {
         e.preventDefault();
+        const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+        axios
+            .post(url, register)
+            .then(() => navigate("/"))
+            .catch((error) => alert(error));
     }
     return (
         <Main>
             <LogoContainer src={trackItLogo} alt="logo" />
             <InputContainer>
-                <StyledInput type="text" />
-                <StyledInput type="number" />
-                <StyledInput type="email" />
-                <StyledInput type="url" />
+                <StyledInput
+                    name="email"
+                    type="email"
+                    value={register.email}
+                    onChange={handleForm}
+                    placeHolder="email"
+                />
+                <StyledInput
+                    name="password"
+                    type="password"
+                    value={register.password}
+                    onChange={handleForm}
+                    placeHolder="senha"
+                />
+                <StyledInput
+                    name="name"
+                    type="text"
+                    value={register.name}
+                    onChange={handleForm}
+                    placeHolder="nome"
+                />
+                <StyledInput
+                    name="image"
+                    type="url"
+                    value={register.image}
+                    onChange={handleForm}
+                    placeHolder="foto"
+                />
                 <StyledButton type="submit" onClick={handleButtonClick}>
-                    Entrar
+                    Cadastrar
                 </StyledButton>
                 <StyledLink to="/">Já tem uma conta? Faça login!</StyledLink>
             </InputContainer>
