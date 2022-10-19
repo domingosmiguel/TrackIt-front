@@ -12,7 +12,7 @@ function App() {
         <BrowserRouter>
             <GlobalStyles />
             <Routes>
-                <Route path="/" element={<Login />} exact />
+                <Route path="/" element={<Login setLoginData={setLoginData} />} exact />
                 <Route path="/cadastro" element={<Registration />} />
                 <Route path="/:route" element={<LoggedPage />} />
             </Routes>

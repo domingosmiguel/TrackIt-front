@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -7,18 +7,31 @@ import trackItLogo from "../images/trackit.PNG";
 import StyledButton from "./StyledButton";
 import StyledInput from "./StyledInput";
 
-export default function Login() {
+export default function Login({ setLoginData }) {
     const navigate = useNavigate();
     const [login, setLogin] = useState({
         email: "",
         password: "",
     });
+    useEffect(() => {
+        const serializedOldLoginData = localStorage.getItem("loginData");
+        if (serializedOldLoginData !== null) {
+            const oldLoginData = JSON.parse(serializedOldLoginData);
+            setLoginData(oldLoginData);
+            console.log("🚀 ~ file: Login.jsx ~ line 21 ~ useEffect ~ oldLoginData", oldLoginData);
+            navigate("/habitos");
+        }
+    }, []);
 
     function handleForm(e) {
         setLogin({ ...login, [e.target.name]: e.target.value });
     }
-    function loginSuccessful({ data }) {
-        console.log(data);
+    function successfulLogin({ data }) {
+        const { name, image, token, id, email } = data;
+        const newLoginData = { name, image, token, id, email };
+        setLoginData(newLoginData);
+        const serializedNewLoginData = JSON.stringify(newLoginData);
+        localStorage.setItem("loginData", serializedNewLoginData);
         navigate("/");
     }
     function handleButtonClick(e) {
@@ -26,7 +39,7 @@ export default function Login() {
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
         axios
             .post(url, login)
-            .then(loginSuccessful)
+            .then(successfulLogin)
             .catch((error) => alert(error));
     }
     return (
