@@ -1,13 +1,14 @@
 import styled from "styled-components";
-import StyledButton from "./StyledButton";
+// import StyledButton from "./StyledButton";
+import { ButtonStyle } from "./StyledButton";
 
 export default function Footer() {
     return (
         <FooterContainer>
             <NavContainerFooter>
-                <NewButton>Hábitos</NewButton>
-                <NewButton>Hoje</NewButton>
-                <NewButton>Histórico</NewButton>
+                <FooterButton>Hábitos</FooterButton>
+                <FooterButton>Hoje</FooterButton>
+                <FooterButton>Histórico</FooterButton>
             </NavContainerFooter>
         </FooterContainer>
     );
@@ -15,11 +16,11 @@ export default function Footer() {
 const FooterContainer = styled.footer`
     width: 100vw;
     height: 70px;
-    background-color: var(--darkBlue);
-    color: white;
+    background-color: white;
 
     position: fixed;
     bottom: 0;
+    z-index: 2;
 `;
 const NavContainerFooter = styled.nav`
     max-width: 1200px;
@@ -36,7 +37,7 @@ const NavContainerFooter = styled.nav`
     padding: 0 18px;
     align-items: center;
 `;
-const NewButton = styled(StyledButton)`
+const FooterButton = styled(ButtonStyle)`
     width: 100px;
     background-color: white;
     color: var(--blue);

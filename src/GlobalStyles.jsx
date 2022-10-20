@@ -2,10 +2,12 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
     *{
-        --blue: rgba(82, 182, 255, 1);
-        --darkBlue:rgba(18, 107, 165, 1);
-;
-
+        --blue: rgb(82, 182, 255);
+        --darkBlue:rgb(18, 107, 165);
+        --lightGray: rgb(229, 229, 229);
+        --midGray: rgb(207, 207, 207);
+        --darkGray: rgb(102, 102, 102);
+        
         @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Playball&display=swap');
 
         box-sizing: border-box;
@@ -14,9 +16,9 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Lexend Deca', sans-serif;
 	    font-weight: 400;
         
-        ::-webkit-scrollbar {
+        /* ::-webkit-scrollbar {
             display: none;
-        }        
+        }         */
         // reset
         html, body, div, span, applet, object, iframe,
         h1, h2, h3, h4, h5, h6, p, blockquote, pre,

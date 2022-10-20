@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import Default from "../images/default.jpg";
-export default function Header({ isLogged = true, userImage }) {
+import DefaultImage from "../images/default.jpg";
+
+export default function Header({ userImage }) {
     return (
         <HeaderContainer>
             <NavContainerHeader>
                 TrackIt
-                {isLogged && <ImageContainer src={userImage || Default} />}
+                <ImageContainer src={userImage || DefaultImage} />
             </NavContainerHeader>
         </HeaderContainer>
     );
@@ -18,6 +19,7 @@ const HeaderContainer = styled.header`
 
     position: fixed;
     top: 0;
+    z-index: 2;
 `;
 const NavContainerHeader = styled.nav`
     max-width: 1200px;

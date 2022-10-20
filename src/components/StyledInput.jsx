@@ -13,6 +13,7 @@ export default function StyledInput({ name, type, value, onChange, placeHolder }
 }
 
 const InputStyle = styled.input`
+    width: 100%;
     height: 45px;
     margin: 3px 0;
     cursor: text;

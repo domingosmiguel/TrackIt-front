@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Registration from "./components/Registration";
 import LoggedPage from "./components/LoggedPage";
 import { useState, useEffect } from "react";
+import { LoginProvider } from "./components/LoginContext";
 
 function App() {
     const [loginData, setLoginData] = useState(null);
@@ -14,7 +15,6 @@ function App() {
         if (serializedOldLoginData !== null) {
             const oldLoginData = JSON.parse(serializedOldLoginData);
             setLoginData(oldLoginData);
-            console.log("🚀 ~ file: Login.jsx ~ line 21 ~ useEffect ~ oldLoginData", oldLoginData);
         }
     }, []);
     return (
@@ -27,7 +27,14 @@ function App() {
                     exact
                 />
                 <Route path="/cadastro" element={<Registration />} />
-                <Route path="/:route" element={<LoggedPage loginData={loginData} />} />
+                <Route
+                    path="/:route"
+                    element={
+                        <LoginProvider value={{ loginData }}>
+                            <LoggedPage loginData={loginData} />
+                        </LoginProvider>
+                    }
+                />
             </Routes>
         </BrowserRouter>
     );

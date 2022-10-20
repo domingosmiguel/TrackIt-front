@@ -8,7 +8,7 @@ export default function StyledButton({ children, type = "button", onClick }) {
     );
 }
 
-const ButtonStyle = styled.button`
+export const ButtonStyle = styled.button`
     width: 100%;
     height: 45px;
     margin: 3px 0;
