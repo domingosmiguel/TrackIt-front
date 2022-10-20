@@ -9,6 +9,7 @@ import StyledInput from "./StyledInput";
 
 export default function Login({ loginData, setLoginData }) {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [login, setLogin] = useState({
         email: "",
         password: "",
@@ -28,13 +29,15 @@ export default function Login({ loginData, setLoginData }) {
         localStorage.setItem("loginData", serializedNewLoginData);
         navigate("/habitos");
     }
+    function failedLogin(error) {
+        alert(error);
+        setLoading(false);
+    }
     function handleButtonClick(e) {
         e.preventDefault();
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
-        axios
-            .post(url, login)
-            .then(successfulLogin)
-            .catch((error) => alert(error));
+        setLoading(true);
+        axios.post(url, login).then(successfulLogin).catch(failedLogin);
     }
     return (
         <Main>
@@ -42,6 +45,7 @@ export default function Login({ loginData, setLoginData }) {
             <InputContainer>
                 <StyledInput
                     name="email"
+                    disabled={loading}
                     type="email"
                     value={login.email}
                     onChange={handleForm}
@@ -49,15 +53,18 @@ export default function Login({ loginData, setLoginData }) {
                 />
                 <StyledInput
                     name="password"
+                    disabled={loading}
                     type="password"
                     value={login.password}
                     onChange={handleForm}
                     placeHolder="senha"
                 />
-                <StyledButton type="submit" onClick={handleButtonClick}>
+                <StyledButton disabled={loading} type="submit" onClick={handleButtonClick}>
                     Entrar
                 </StyledButton>
-                <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se</StyledLink>
+                <StyledLink disabled={loading} to="/cadastro">
+                    Não tem uma conta? Cadastre-se
+                </StyledLink>
             </InputContainer>
         </Main>
     );
@@ -77,6 +84,7 @@ const InputContainer = styled.form`
     width: 100%;
 `;
 const StyledLink = styled(Link)`
+    pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
     text-align: center;
     color: var(--blue);
     cursor: pointer;

@@ -1,9 +1,23 @@
 import styled from "styled-components";
-// tirar disabled padrao
-export default function StyledButton({ children, disabled = false, type = "button", onClick }) {
+import { ThreeDots } from "react-loader-spinner";
+
+export default function StyledButton({ children, disabled, type = "button", onClick }) {
     return (
         <ButtonStyle disabled={disabled} type={type} onClick={onClick}>
-            {children}
+            {disabled ? (
+                <ThreeDots
+                    height="80"
+                    width="80"
+                    radius="9"
+                    color="white"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle={{}}
+                    wrapperClassName=""
+                    visible={true}
+                />
+            ) : (
+                children
+            )}
         </ButtonStyle>
     );
 }
@@ -16,8 +30,10 @@ export const ButtonStyle = styled.button`
     color: white;
     background-color: var(--blue);
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    :disabled {
-        background-color: var(--lightGray);
-    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;

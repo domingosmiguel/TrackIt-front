@@ -71,9 +71,11 @@ export default function NewHabitCard({
                 </DaysContainer>
             </DataContainer>
             <ButtonsContainer>
-                <StyledButton disabled={loading} onClick={() => setAddNewHabit(false)}>
-                    Cancelar
-                </StyledButton>
+                {!loading && (
+                    <StyledButton disabled={loading} onClick={() => setAddNewHabit(false)}>
+                        Cancelar
+                    </StyledButton>
+                )}
                 <StyledButton disabled={loading} onClick={handleSave}>
                     Salvar
                 </StyledButton>

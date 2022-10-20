@@ -1,14 +1,6 @@
 import styled from "styled-components";
 
-export default function StyledInput({
-    name,
-    // tirar este disabled padrao
-    disabled = false,
-    type,
-    value,
-    onChange,
-    placeHolder,
-}) {
+export default function StyledInput({ name, disabled, type, value, onChange, placeHolder }) {
     return (
         <InputStyle
             name={name}

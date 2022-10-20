@@ -9,6 +9,7 @@ import StyledInput from "./StyledInput";
 
 export default function Registration() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [register, setRegister] = useState({
         email: "",
         name: "",
@@ -19,13 +20,18 @@ export default function Registration() {
     function handleForm(e) {
         setRegister({ ...register, [e.target.name]: e.target.value });
     }
+    function failedRegistration(error) {
+        alert(error);
+        setLoading(false);
+    }
     function handleButtonClick(e) {
         e.preventDefault();
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+        setLoading(true);
         axios
             .post(url, register)
             .then(() => navigate("/"))
-            .catch((error) => alert(error));
+            .catch(failedRegistration);
     }
     return (
         <Main>
@@ -33,6 +39,7 @@ export default function Registration() {
             <InputContainer>
                 <StyledInput
                     name="email"
+                    disabled={loading}
                     type="email"
                     value={register.email}
                     onChange={handleForm}
@@ -40,6 +47,7 @@ export default function Registration() {
                 />
                 <StyledInput
                     name="password"
+                    disabled={loading}
                     type="password"
                     value={register.password}
                     onChange={handleForm}
@@ -47,6 +55,7 @@ export default function Registration() {
                 />
                 <StyledInput
                     name="name"
+                    disabled={loading}
                     type="text"
                     value={register.name}
                     onChange={handleForm}
@@ -54,15 +63,18 @@ export default function Registration() {
                 />
                 <StyledInput
                     name="image"
+                    disabled={loading}
                     type="url"
                     value={register.image}
                     onChange={handleForm}
                     placeHolder="foto"
                 />
-                <StyledButton type="submit" onClick={handleButtonClick}>
+                <StyledButton disabled={loading} type="submit" onClick={handleButtonClick}>
                     Cadastrar
                 </StyledButton>
-                <StyledLink to="/">Já tem uma conta? Faça login!</StyledLink>
+                <StyledLink disabled={loading} to="/">
+                    Já tem uma conta? Faça login!
+                </StyledLink>
             </InputContainer>
         </Main>
     );
@@ -82,6 +94,7 @@ const InputContainer = styled.form`
     width: 100%;
 `;
 const StyledLink = styled(Link)`
+    pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
     text-align: center;
     color: var(--blue);
     cursor: pointer;
