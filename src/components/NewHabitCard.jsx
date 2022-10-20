@@ -6,25 +6,40 @@ import LoginContext from "./LoginContext";
 import StyledButton from "./StyledButton";
 import StyledInput from "./StyledInput";
 
-export default function NewHabitCard({ setAddNewHabit }) {
+export default function NewHabitCard({
+    newHabit,
+    setNewHabit,
+    setAddNewHabit,
+    userHabits,
+    setUserHabits,
+}) {
     const {
         loginData: { token },
     } = useContext(LoginContext);
-    const [newHabit, setNewHabit] = useState({ name: "", days: [] });
-    console.log("🚀 ~ file: NewHabitCard.jsx ~ line 14 ~ NewHabitCard ~ newHabit", newHabit);
+    const [loading, setLoading] = useState(false);
     const arrayOfDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
+    function newHabitSuccessful({ data }) {
+        setAddNewHabit(false);
+        setNewHabit({ name: "", days: [] });
+        setUserHabits([...userHabits, data]);
+        setLoading(false);
+    }
+    function newHabitFail(error) {
+        alert(error);
+        setLoading(false);
+    }
     function handleSave() {
-        const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        axios
-            .post(url, newHabit, config)
-            .then(() => setAddNewHabit(false))
-            .catch((error) => alert(error));
+        if (newHabit.name.length >= 3 && newHabit.days.length >= 1) {
+            const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            setLoading(true);
+            axios.post(url, newHabit, config).then(newHabitSuccessful).catch(newHabitFail);
+        }
     }
     function handleNewHabitData(name, value) {
         setNewHabit({ ...newHabit, [name]: value });
@@ -34,6 +49,7 @@ export default function NewHabitCard({ setAddNewHabit }) {
             <DataContainer>
                 <StyledInput
                     name="name"
+                    disabled={loading}
                     type="text"
                     value={newHabit.name}
                     onChange={(e) => handleNewHabitData(e.target.name, e.target.value)}
@@ -43,6 +59,7 @@ export default function NewHabitCard({ setAddNewHabit }) {
                     {arrayOfDays.map((day, index) => (
                         <Day
                             key={index}
+                            disabled={loading}
                             name="days"
                             numberOfTheDay={index}
                             daysOfTheWeek={newHabit.days}
@@ -54,8 +71,12 @@ export default function NewHabitCard({ setAddNewHabit }) {
                 </DaysContainer>
             </DataContainer>
             <ButtonsContainer>
-                <StyledButton onClick={() => setAddNewHabit(false)}>Cancelar</StyledButton>
-                <StyledButton onClick={handleSave}>Salvar</StyledButton>
+                <StyledButton disabled={loading} onClick={() => setAddNewHabit(false)}>
+                    Cancelar
+                </StyledButton>
+                <StyledButton disabled={loading} onClick={handleSave}>
+                    Salvar
+                </StyledButton>
             </ButtonsContainer>
         </Card>
     );

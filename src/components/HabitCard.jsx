@@ -1,23 +1,50 @@
 import styled from "styled-components";
 import Day from "./Day";
 import Delete from "../images/delete.PNG";
+import axios from "axios";
 
-export default function HabitCard({ children }) {
+export default function HabitCard({ children, id, days, token, userHabits, setUserHabits }) {
     const arrayOfDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
+    function deletionSuccess() {
+        const newHabitsList = userHabits.filter((habit) => habit.id !== id);
+        setUserHabits([...newHabitsList]);
+    }
+    function handleDeletion() {
+        const url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        axios
+            .delete(url, config)
+            .then(deletionSuccess)
+            .catch((error) => alert(error));
+    }
+    function handleDeletionClick() {
+        if (window.confirm("sure you wanna delete this habit track?")) {
+            handleDeletion();
+        }
+    }
     return (
         <Card>
             <DataContainer>
                 <TitleContainer>{children}</TitleContainer>
                 <DaysContainer>
                     {arrayOfDays.map((day, index) => (
-                        <Day key={index} name="days" numberOfTheDay={index}>
+                        <Day
+                            key={index}
+                            disabled={true}
+                            numberOfTheDay={index}
+                            daysOfTheWeek={days}
+                        >
                             {day}
                         </Day>
                     ))}
                 </DaysContainer>
             </DataContainer>
-            <ExcludeButton src={Delete} />
+            <DeleteButton src={Delete} onClick={handleDeletionClick} />
         </Card>
     );
 }
@@ -43,9 +70,10 @@ const DaysContainer = styled.div`
     justify-content: space-between;
     align-items: center;
 `;
-const ExcludeButton = styled.img`
+const DeleteButton = styled.img`
     width: 15px;
     height: 15px;
     margin-right: -5px;
     margin-top: -2px;
+    cursor: pointer;
 `;

@@ -6,7 +6,6 @@ import Header from "./Header";
 
 export default function LoggedPage({ loginData }) {
     const { route } = useParams();
-    console.log("🚀 ~ file: LoggedPage.jsx ~ line 8 ~ LoggedPage ~ route", route);
     if (loginData === null) {
         return (
             <>

@@ -9,7 +9,8 @@ import LoginContext from "./LoginContext";
 export default function Habits() {
     const [addNewHabit, setAddNewHabit] = useState(false);
     const [userHabits, setUserHabits] = useState(null);
-    console.log("🚀 ~ file: Habits.jsx ~ line 10 ~ Habits ~ userHabits", userHabits);
+    const [newHabit, setNewHabit] = useState({ name: "", days: [] });
+
     const {
         loginData: { token },
     } = useContext(LoginContext);
@@ -30,6 +31,29 @@ export default function Habits() {
         return;
     }
 
+    function hasHabitsOnTheServer() {
+        if (userHabits.length === 0) {
+            return (
+                <UserHabitsHeader>
+                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a
+                    trackear!
+                </UserHabitsHeader>
+            );
+        }
+        return userHabits.map((habit) => (
+            <HabitCard
+                key={habit.id}
+                id={habit.id}
+                days={habit.days}
+                token={token}
+                userHabits={userHabits}
+                setUserHabits={setUserHabits}
+            >
+                {habit.name}
+            </HabitCard>
+        ));
+    }
+
     return (
         <HabitsMain>
             <HabitsHeader>
@@ -38,16 +62,16 @@ export default function Habits() {
                     {addNewHabit ? "-" : "+"}
                 </HabitsButton>
             </HabitsHeader>
-            {addNewHabit && <NewHabitCard setAddNewHabit={setAddNewHabit} />}
-            {userHabits.map((habit) => (
-                <HabitCard key={habit.id}>{habit.name}</HabitCard>
-            ))}
-            <HabitsSection>
-                <UserHabitsHeader>
-                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a
-                    trackear!
-                </UserHabitsHeader>
-            </HabitsSection>
+            {addNewHabit && (
+                <NewHabitCard
+                    newHabit={newHabit}
+                    setNewHabit={setNewHabit}
+                    setAddNewHabit={setAddNewHabit}
+                    userHabits={userHabits}
+                    setUserHabits={setUserHabits}
+                />
+            )}
+            <HabitsSection>{hasHabitsOnTheServer()}</HabitsSection>
         </HabitsMain>
     );
 }

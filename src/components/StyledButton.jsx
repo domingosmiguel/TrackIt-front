@@ -1,14 +1,15 @@
 import styled from "styled-components";
-
-export default function StyledButton({ children, type = "button", onClick }) {
+// tirar disabled padrao
+export default function StyledButton({ children, disabled = false, type = "button", onClick }) {
     return (
-        <ButtonStyle type={type} onClick={onClick}>
+        <ButtonStyle disabled={disabled} type={type} onClick={onClick}>
             {children}
         </ButtonStyle>
     );
 }
 
 export const ButtonStyle = styled.button`
+    pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
     width: 100%;
     height: 45px;
     margin: 3px 0;
@@ -16,4 +17,7 @@ export const ButtonStyle = styled.button`
     background-color: var(--blue);
     border: none;
     cursor: pointer;
+    :disabled {
+        background-color: var(--lightGray);
+    }
 `;
