@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Footer from "./Footer";
 import Habits from "./Habits";
 import Header from "./Header";
+import Today from "./Today";
 
 export default function LoggedPage({ loginData }) {
     const { route } = useParams();
@@ -18,6 +19,8 @@ export default function LoggedPage({ loginData }) {
         switch (route) {
             case "habitos":
                 return <Habits />;
+            case "hoje":
+                return <Today />;
             default:
                 break;
         }

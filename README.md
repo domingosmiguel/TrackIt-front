@@ -4,7 +4,7 @@ The goal...
 
 ## **Exercised Contents**:
 
--   React Hooks (useState)
+-   React Hooks (useState, useEffect, useContext)
 -   React Router (Link, useNavigate)
 -   Styled components (GlobalStyles)
 -   API integration

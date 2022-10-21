@@ -5,8 +5,9 @@ const GlobalStyles = createGlobalStyle`
         --blue: rgb(82, 182, 255);
         --darkBlue:rgb(18, 107, 165);
         --lightGray: rgb(229, 229, 229);
-        --midGray: rgb(207, 207, 207);
+        --midGray: rgb(190, 190, 190);
         --darkGray: rgb(102, 102, 102);
+        --green: rgb(143,197,73);
         
         @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Playball&display=swap');
 

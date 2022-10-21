@@ -85,7 +85,7 @@ export default function NewHabitCard({
 }
 
 const Card = styled.section`
-    max-width: 354px;
+    max-width: 400px;
     min-height: 180px;
     background-color: white;
     border-radius: 5px;

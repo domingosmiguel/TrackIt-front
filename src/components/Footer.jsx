@@ -1,13 +1,15 @@
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 // import StyledButton from "./StyledButton";
 import { ButtonStyle } from "./StyledButton";
 
 export default function Footer() {
+    const navigate = useNavigate();
     return (
         <FooterContainer>
             <NavContainerFooter>
                 <FooterButton>Hábitos</FooterButton>
-                <FooterButton>Hoje</FooterButton>
+                <FooterButton onClick={() => navigate("/hoje")}>Hoje</FooterButton>
                 <FooterButton>Histórico</FooterButton>
             </NavContainerFooter>
         </FooterContainer>
