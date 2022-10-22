@@ -7,8 +7,8 @@ export default function TodayHabitCard({
     id,
     token,
     done,
-    renderHabitsAgain,
-    setRenderHabitsAgain,
+    refreshHabits,
+    setRefreshHabits,
 }) {
     function handleCheckClick() {
         let url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
@@ -22,7 +22,7 @@ export default function TodayHabitCard({
         };
         axios
             .post(url, {}, config)
-            .then(() => setRenderHabitsAgain(!renderHabitsAgain))
+            .then(() => setRefreshHabits(!refreshHabits))
             .catch((error) => alert(error));
     }
     return (
@@ -37,12 +37,14 @@ export default function TodayHabitCard({
                 </SubTitleContainer>
                 <SubTitleContainer>
                     Seu record:
-                    <LongestStreakDays current={children[1] === children[2] && children[2] > 0}>
+                    <LongestStreakDays
+                        current={children[1] === children[2] && children[2] > 0 && done}
+                    >
                         {children[2]} dia{children[2] !== 1 ? "s" : ""}
                     </LongestStreakDays>
                 </SubTitleContainer>
             </DataContainer>
-            <CheckButton done={done} onClick={handleCheckClick} />
+            <CheckButton done={`${done}`} onClick={handleCheckClick} />
         </Card>
     );
 }
@@ -60,7 +62,7 @@ const Card = styled.section`
 `;
 const DataContainer = styled.div``;
 const TitleContainer = styled.p``;
-const SubTitleContainer = styled.p`
+const SubTitleContainer = styled.div`
     display: flex;
 `;
 const CurrentStrikeDays = styled.p`
@@ -77,7 +79,7 @@ const CheckButton = styled(BsCheckLg)`
     width: 69px;
     height: 69px;
     min-width: 69px;
-    background-color: ${({ done }) => (done ? "var(--green)" : "var(--lightGray)")};
+    background-color: ${({ done }) => (done === "true" ? "var(--green)" : "var(--lightGray)")};
     border-radius: 5px;
     padding: 16.5px 11.5px 17.5px 15.5px;
     cursor: pointer;

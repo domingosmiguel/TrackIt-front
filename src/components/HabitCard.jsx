@@ -50,8 +50,8 @@ export default function HabitCard({ children, id, days, token, userHabits, setUs
 }
 
 const Card = styled.section`
-    max-width: 354px;
-    height: 91px;
+    max-width: 400px;
+    min-height: 91px;
     background-color: white;
     border-radius: 5px;
     padding: 14px;

@@ -8,9 +8,9 @@ export default function Footer() {
     return (
         <FooterContainer>
             <NavContainerFooter>
-                <FooterButton>Hábitos</FooterButton>
+                <FooterButton onClick={() => navigate("/habitos")}>Hábitos</FooterButton>
                 <FooterButton onClick={() => navigate("/hoje")}>Hoje</FooterButton>
-                <FooterButton>Histórico</FooterButton>
+                <FooterButton onClick={() => navigate("/historico")}>Histórico</FooterButton>
             </NavContainerFooter>
         </FooterContainer>
     );

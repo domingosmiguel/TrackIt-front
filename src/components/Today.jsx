@@ -4,12 +4,11 @@ import axios from "axios";
 import LoginContext from "./LoginContext";
 import dayjs from "dayjs";
 import TodayHabitCard from "./TodayHabitCard";
-import "dayjs/locale/pt-br";
 
 export default function Habits() {
     const [todayHabits, setTodayHabits] = useState(null);
     const [todayHabitsDone, setTodayHabitsDone] = useState(null);
-    const [renderHabitsAgain, setRenderHabitsAgain] = useState(false);
+    const [refreshHabits, setRefreshHabits] = useState(false);
     const {
         loginData: { token },
     } = useContext(LoginContext);
@@ -34,7 +33,7 @@ export default function Habits() {
             .get(url, config)
             .then((response) => setTodayHabits(response.data))
             .catch((error) => alert(error));
-    }, [renderHabitsAgain]);
+    }, [refreshHabits]);
     if (todayHabits === null) {
         return;
     }
@@ -54,15 +53,15 @@ export default function Habits() {
                 id={habit.id}
                 token={token}
                 done={habit.done}
-                renderHabitsAgain={renderHabitsAgain}
-                setRenderHabitsAgain={setRenderHabitsAgain}
+                refreshHabits={refreshHabits}
+                setRefreshHabits={setRefreshHabits}
             >
                 {[habit.name, habit.currentSequence, habit.highestSequence]}
             </TodayHabitCard>
         ));
     }
     function dayOfTheWeek() {
-        const writtenData = dayjs().locale("pt-br").format("dddd").split("-")[0];
+        const writtenData = dayjs().format("dddd").split("-")[0];
         const writtenDataUppercase = writtenData[0].toUpperCase() + writtenData.substring(1);
         return writtenDataUppercase + dayjs().format(", D/MM");
     }
@@ -80,6 +79,11 @@ export default function Habits() {
         </HabitsMain>
     );
 }
+const HabitsMain = styled.main`
+    width: 100%;
+    position: absolute;
+    padding: 0 18px;
+`;
 const HabitsHeader = styled.header`
     display: flex;
     flex-direction: column;
@@ -88,13 +92,8 @@ const HabitsHeader = styled.header`
     margin: 5px auto;
 `;
 const TodayTime = styled.time``;
-const PercentageOfHabits = styled.time`
+const PercentageOfHabits = styled.div`
     color: ${({ changeColor }) => (changeColor ? "var(--green)" : "var(--midGray)")};
-`;
-const HabitsMain = styled.main`
-    width: 100%;
-    position: absolute;
-    padding: 0 18px;
 `;
 const HabitsSection = styled.section`
     max-width: 1200px;

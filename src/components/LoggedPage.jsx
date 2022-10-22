@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Footer from "./Footer";
 import Habits from "./Habits";
 import Header from "./Header";
+import History from "./History";
+import PageNotFound from "./PageNotFound";
 import Today from "./Today";
 
 export default function LoggedPage({ loginData }) {
@@ -21,8 +23,10 @@ export default function LoggedPage({ loginData }) {
                 return <Habits />;
             case "hoje":
                 return <Today />;
+            case "historico":
+                return <History />;
             default:
-                break;
+                return <PageNotFound />;
         }
     }
     return (
