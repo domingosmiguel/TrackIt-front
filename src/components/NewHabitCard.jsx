@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import Day from "./Day";
 import LoginContext from "./LoginContext";
-import StyledButton from "./StyledButton";
+import StyledButton, { ButtonStyle } from "./StyledButton";
 import StyledInput from "./StyledInput";
 
 export default function NewHabitCard({
     newHabit,
     setNewHabit,
+    addNewHabit,
     setAddNewHabit,
     userHabits,
     setUserHabits,
@@ -45,7 +46,7 @@ export default function NewHabitCard({
         setNewHabit({ ...newHabit, [name]: value });
     }
     return (
-        <Card>
+        <Card visible={addNewHabit}>
             <DataContainer>
                 <StyledInput
                     name="name"
@@ -71,12 +72,21 @@ export default function NewHabitCard({
                 </DaysContainer>
             </DataContainer>
             <ButtonsContainer>
-                {!loading && (
-                    <StyledButton disabled={loading} onClick={() => setAddNewHabit(false)}>
-                        Cancelar
-                    </StyledButton>
-                )}
-                <StyledButton disabled={loading} onClick={handleSave}>
+                <StyledButton
+                    disabled={loading}
+                    invertColor={true}
+                    freeButtonSize={true}
+                    onClick={() => setAddNewHabit(false)}
+                    fontSize={`font-size: 15.976px; line-height: 20px;`}
+                >
+                    Cancelar
+                </StyledButton>
+                <StyledButton
+                    loading={loading}
+                    freeButtonSize={true}
+                    onClick={handleSave}
+                    fontSize={`font-size: 15.976px; line-height: 20px;`}
+                >
                     Salvar
                 </StyledButton>
             </ButtonsContainer>
@@ -84,21 +94,54 @@ export default function NewHabitCard({
     );
 }
 
+const ScaleOutTop = keyframes`
+    0% {
+    transform: scaleY(1);
+    transform-origin: 100% 0%;
+    opacity: 1;
+    }
+    100% {
+        transform: scaleY(0);
+        transform-origin: 100% 0%;
+        opacity: 1;
+    }
+`;
+const ScaleInTop = keyframes`
+    0% {
+    transform: scaleY(0);
+    transform-origin: 100% 0%;
+    opacity: 1;
+    }
+    100% {
+        transform: scaleY(1);
+        transform-origin: 100% 0%;
+        opacity: 1;
+    }
+`;
+const AnimationIn = css`
+    animation: ${ScaleInTop} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+`;
+const AnimationOut = css`
+    animation: ${ScaleOutTop} 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+`;
 const Card = styled.section`
     max-width: 400px;
+    width: 100%;
     min-height: 180px;
     background-color: white;
     border-radius: 5px;
     padding: 18px;
-    margin: 20px auto 0;
+    margin: 10px 0 0;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    ${({ visible }) => (visible ? AnimationIn : AnimationOut)};
 `;
 const DataContainer = styled.div``;
 const DaysContainer = styled.div`
-    max-width: 234px;
+    max-width: fit-content;
     margin-top: 5px;
 
     display: flex;

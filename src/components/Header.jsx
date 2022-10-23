@@ -20,9 +20,11 @@ const HeaderContainer = styled.header`
     position: fixed;
     top: 0;
     z-index: 2;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `;
 const NavContainerHeader = styled.nav`
-    max-width: 1200px;
+    max-width: 436px;
     height: 100%;
     margin: 0 auto;
 

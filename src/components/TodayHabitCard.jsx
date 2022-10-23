@@ -31,17 +31,15 @@ export default function TodayHabitCard({
                 <TitleContainer>{children[0]}</TitleContainer>
                 <SubTitleContainer>
                     Sequência atual:
-                    <CurrentStrikeDays done={done}>
+                    <DaysCount changeColor={done}>
                         {children[1]} dia{children[1] !== 1 ? "s" : ""}
-                    </CurrentStrikeDays>
+                    </DaysCount>
                 </SubTitleContainer>
                 <SubTitleContainer>
                     Seu record:
-                    <LongestStreakDays
-                        current={children[1] === children[2] && children[2] > 0 && done}
-                    >
+                    <DaysCount changeColor={children[1] === children[2] && children[2] > 0 && done}>
                         {children[2]} dia{children[2] !== 1 ? "s" : ""}
-                    </LongestStreakDays>
+                    </DaysCount>
                 </SubTitleContainer>
             </DataContainer>
             <CheckButton done={`${done}`} onClick={handleCheckClick} />
@@ -60,18 +58,25 @@ const Card = styled.section`
     display: flex;
     justify-content: space-between;
 `;
-const DataContainer = styled.div``;
-const TitleContainer = styled.p``;
-const SubTitleContainer = styled.div`
+const DataContainer = styled.div`
+    margin-right: 15px;
+`;
+const TitleContainer = styled.p`
+    font-size: 19.976px;
+    line-height: 25px;
+    color: var(--darkGray);
+    margin-bottom: 7px;
+`;
+const SubTitleContainer = styled.p`
     display: flex;
+    font-size: 13.976px;
+    line-height: 17.5px;
+    color: var(--darkGray);
 `;
-const CurrentStrikeDays = styled.p`
-    color: ${({ done }) => (done ? "var(--green)" : "var(--darkGray)")};
+const DaysCount = styled.b`
+    color: ${({ changeColor }) => (changeColor ? "var(--green)" : "var(--darkGray)")};
+    margin-left: 5px;
 `;
-const LongestStreakDays = styled.p`
-    color: ${({ current }) => (current ? "var(--green)" : "var(--darkGray)")};
-`;
-
 const CheckButton = styled(BsCheckLg)`
     display: flex;
     align-self: center;

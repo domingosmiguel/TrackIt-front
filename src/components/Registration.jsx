@@ -69,7 +69,7 @@ export default function Registration() {
                     onChange={handleForm}
                     placeHolder="foto"
                 />
-                <StyledButton disabled={loading} type="submit" onClick={handleButtonClick}>
+                <StyledButton loading={loading} type="submit" onClick={handleButtonClick}>
                     Cadastrar
                 </StyledButton>
                 <StyledLink disabled={loading} to="/">
@@ -83,9 +83,15 @@ const Main = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+    height: calc((var(--vh, 1vh) * 100));
 `;
 const LogoContainer = styled.img`
     max-width: 250px;
+
+    margin-bottom: 45px;
 `;
 const InputContainer = styled.form`
     display: flex;
@@ -99,4 +105,7 @@ const StyledLink = styled(Link)`
     color: var(--blue);
     cursor: pointer;
     margin-top: 25px;
+
+    font-size: 13.976px;
+    line-height: 17px;
 `;

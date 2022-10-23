@@ -27,7 +27,7 @@ export default function Login({ loginData, setLoginData }) {
         setLoginData(newLoginData);
         const serializedNewLoginData = JSON.stringify(newLoginData);
         localStorage.setItem("loginData", serializedNewLoginData);
-        navigate("/habitos");
+        navigate("/hoje");
     }
     function failedLogin(error) {
         alert(error);
@@ -59,7 +59,8 @@ export default function Login({ loginData, setLoginData }) {
                     onChange={handleForm}
                     placeHolder="senha"
                 />
-                <StyledButton disabled={loading} type="submit" onClick={handleButtonClick}>
+
+                <StyledButton loading={loading} type="submit" onClick={handleButtonClick}>
                     Entrar
                 </StyledButton>
                 <StyledLink disabled={loading} to="/cadastro">
@@ -73,9 +74,14 @@ const Main = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+    height: calc((var(--vh, 1vh) * 100));
 `;
 const LogoContainer = styled.img`
     max-width: 250px;
+    margin-bottom: 45px;
 `;
 const InputContainer = styled.form`
     display: flex;
@@ -89,4 +95,7 @@ const StyledLink = styled(Link)`
     color: var(--blue);
     cursor: pointer;
     margin-top: 25px;
+
+    font-size: 13.976px;
+    line-height: 17px;
 `;

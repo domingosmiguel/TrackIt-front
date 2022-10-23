@@ -60,7 +60,11 @@ const Card = styled.section`
     display: flex;
     justify-content: space-between;
 `;
-const TitleContainer = styled.p``;
+const TitleContainer = styled.p`
+    font-size: 19.976px;
+    line-height: 25px;
+    color: var(--darkGray);
+`;
 const DataContainer = styled.div``;
 const DaysContainer = styled.div`
     max-width: 234px;

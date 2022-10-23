@@ -20,4 +20,23 @@ const InputStyle = styled.input`
     margin: 3px 0;
     cursor: text;
     padding: 8px 11px 11px;
+    border: 2px solid var(--midGray);
+    border-radius: 5px;
+
+    font-size: 19.976px;
+    line-height: 25px;
+
+    caret-color: transparent;
+
+    &::placeholder {
+        color: var(--midGray);
+    }
+
+    &:not(:placeholder-shown) {
+        color: var(--darkGray);
+    }
+
+    &:focus {
+        outline-color: var(--darkGray);
+    }
 `;

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import HabitCard from "./HabitCard";
 import NewHabitCard from "./NewHabitCard";
-import { ButtonStyle } from "./StyledButton";
+import StyledButton, { ButtonStyle } from "./StyledButton";
 import axios from "axios";
 import LoginContext from "./LoginContext";
 
@@ -58,14 +58,19 @@ export default function Habits() {
         <HabitsMain>
             <HabitsHeader>
                 Meus hábitos
-                <HabitsButton onClick={() => setAddNewHabit(!addNewHabit)}>
+                <StyledButton
+                    onClick={() => setAddNewHabit(!addNewHabit)}
+                    freeButtonSize={true}
+                    fontSize={`font-size: 26.976px; line-height: 34px;`}
+                >
                     {addNewHabit ? "-" : "+"}
-                </HabitsButton>
+                </StyledButton>
             </HabitsHeader>
             {addNewHabit && (
                 <NewHabitCard
                     newHabit={newHabit}
                     setNewHabit={setNewHabit}
+                    addNewHabit={addNewHabit}
                     setAddNewHabit={setAddNewHabit}
                     userHabits={userHabits}
                     setUserHabits={setUserHabits}
@@ -75,25 +80,38 @@ export default function Habits() {
         </HabitsMain>
     );
 }
-const HabitsHeader = styled.header`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5px auto;
-    /* height: 51px; */
-`;
-const HabitsButton = styled(ButtonStyle)`
-    width: fit-content;
-`;
 const HabitsMain = styled.main`
     width: 100%;
     position: absolute;
     padding: 0 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    padding-bottom: 31px;
+`;
+const HabitsHeader = styled.header`
+    max-width: 400px;
+    width: 100%;
+    height: 57px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 0;
+
+    font-size: 22.976px;
+    line-height: 29px;
+    color: var(--darkBlue);
+    /* letter-spacing: 0; */
 `;
 const HabitsSection = styled.section`
-    max-width: 1200px;
+    max-width: 436px;
     width: 100%;
 `;
 const UserHabitsHeader = styled.header`
     margin: 29px auto 0;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: var(--darkGray);
 `;

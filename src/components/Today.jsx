@@ -4,10 +4,10 @@ import axios from "axios";
 import LoginContext from "./LoginContext";
 import dayjs from "dayjs";
 import TodayHabitCard from "./TodayHabitCard";
+import "dayjs/locale/pt-br";
 
-export default function Habits() {
+export default function Habits({ todayHabitsDone, setTodayHabitsDone }) {
     const [todayHabits, setTodayHabits] = useState(null);
-    const [todayHabitsDone, setTodayHabitsDone] = useState(null);
     const [refreshHabits, setRefreshHabits] = useState(false);
     const {
         loginData: { token },
@@ -39,29 +39,31 @@ export default function Habits() {
     }
 
     function hasHabitsOnTheServer() {
-        if (todayHabits.length === 0) {
-            return (
-                <UserHabitsHeader>
-                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a
-                    trackear!
-                </UserHabitsHeader>
-            );
+        if (todayHabits.length !== 0) {
+            return todayHabits.map((habit) => (
+                <TodayHabitCard
+                    key={habit.id}
+                    id={habit.id}
+                    token={token}
+                    done={habit.done}
+                    refreshHabits={refreshHabits}
+                    setRefreshHabits={setRefreshHabits}
+                >
+                    {[habit.name, habit.currentSequence, habit.highestSequence]}
+                </TodayHabitCard>
+            ));
         }
-        return todayHabits.map((habit) => (
-            <TodayHabitCard
-                key={habit.id}
-                id={habit.id}
-                token={token}
-                done={habit.done}
-                refreshHabits={refreshHabits}
-                setRefreshHabits={setRefreshHabits}
-            >
-                {[habit.name, habit.currentSequence, habit.highestSequence]}
-            </TodayHabitCard>
-        ));
+    }
+    function subtitle() {
+        if (todayHabits.length === 0) {
+            return `Nenhum hábito hoje, vá para a aba "Hábitos" para adicionar um novo hábito`;
+        }
+        return todayHabitsDone > 0
+            ? `${todayHabitsDone}% dos hábitos concluídos`
+            : "Nenhum hábito concluído ainda";
     }
     function dayOfTheWeek() {
-        const writtenData = dayjs().format("dddd").split("-")[0];
+        const writtenData = dayjs().locale("pt-br").format("dddd").split("-")[0];
         const writtenDataUppercase = writtenData[0].toUpperCase() + writtenData.substring(1);
         return writtenDataUppercase + dayjs().format(", D/MM");
     }
@@ -70,9 +72,7 @@ export default function Habits() {
             <HabitsHeader>
                 <TodayTime>{dayOfTheWeek()}</TodayTime>
                 <PercentageOfHabits changeColor={todayHabitsDone > 0}>
-                    {todayHabitsDone > 0
-                        ? `${todayHabitsDone}% dos hábitos concluídos`
-                        : "Nenhum hábito concluído ainda"}
+                    {subtitle()}
                 </PercentageOfHabits>
             </HabitsHeader>
             <HabitsSection>{hasHabitsOnTheServer()}</HabitsSection>
@@ -80,20 +80,28 @@ export default function Habits() {
     );
 }
 const HabitsMain = styled.main`
+    max-width: 436px;
     width: 100%;
     position: absolute;
-    padding: 0 18px;
+    padding: 0 18px 31px;
 `;
 const HabitsHeader = styled.header`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
-    margin: 5px auto;
+    margin: 10px auto 0;
+    height: 97px;
 `;
-const TodayTime = styled.time``;
+const TodayTime = styled.time`
+    font-size: 22.976px;
+    line-height: 29px;
+    color: var(--darkBlue);
+`;
 const PercentageOfHabits = styled.div`
     color: ${({ changeColor }) => (changeColor ? "var(--green)" : "var(--midGray)")};
+    font-size: 17.976px;
+    line-height: 22px;
 `;
 const HabitsSection = styled.section`
     max-width: 1200px;

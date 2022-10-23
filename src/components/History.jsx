@@ -5,10 +5,11 @@ import LoginContext from "./LoginContext";
 import dayjs from "dayjs";
 import Calendar from "react-calendar";
 
+const TODAY = dayjs(new Date()).format("DD/MM/YYYY");
+
 export default function History() {
     const [selectDate, setSelectDate] = useState();
     const [historyData, setHistoryData] = useState(null);
-    console.log("🚀 ~ file: History.jsx ~ line 11 ~ History ~ historyData", historyData);
     const {
         loginData: { token },
     } = useContext(LoginContext);
@@ -31,32 +32,38 @@ export default function History() {
     }
 
     function highlightDays(activeStartDate, date) {
-        const dateIndex = historyData.findIndex(
-            (data) => data.day === dayjs(date).format("DD/MM/YYYY")
-        );
-        if (dateIndex !== -1) {
-            const totalHabits = historyData[dateIndex].habits.length;
-            const completedHabits = historyData[dateIndex].habits.reduce(
-                (acc, cur) => (cur.done ? ++acc : acc),
-                0
-            );
-            if (completedHabits / totalHabits === 1) {
-                return "green";
+        const calendarDay = dayjs(date).format("DD/MM/YYYY");
+
+        if (calendarDay !== TODAY) {
+            const dateIndex = historyData.findIndex((data) => data.day === calendarDay);
+            if (dateIndex !== -1) {
+                const totalHabits = historyData[dateIndex].habits.length;
+                const completedHabits = historyData[dateIndex].habits.reduce(
+                    (acc, cur) => (cur.done ? ++acc : acc),
+                    0
+                );
+                if (completedHabits / totalHabits === 1) {
+                    return "green all";
+                }
+                return "red all";
             }
-            return "red";
+            return "all";
         }
-        // return `${date}` === `${selectDate}` && "teste";
+        return "all";
     }
     function handleClickDay(value, event) {
+        console.log("🚀 ~ file: History.jsx ~ line 53 ~ handleClickDay ~ value", value);
+        console.log("🚀 ~ file: History.jsx ~ line 53 ~ handleClickDay ~ event", event);
         console.log("clicou");
     }
     return (
         <HabitsMain>
             <HabitsHeader>Histórico</HabitsHeader>
-            <HabitsHeader>Calendário</HabitsHeader>
             <StyledCalendar
                 value={selectDate}
                 onChange={setSelectDate}
+                locale="pt-br"
+                calendarType="US"
                 formatDay={(locale, date) => dayjs(date).format("DD")}
                 tileClassName={({ activeStartDate, date }) => highlightDays(activeStartDate, date)}
                 onClickDay={(value, event) => handleClickDay(value, event)}
@@ -67,12 +74,20 @@ export default function History() {
 const HabitsMain = styled.main`
     width: 100%;
     position: absolute;
-    padding: 0 18px;
+    padding: 0 18px 31px;
 `;
 const HabitsHeader = styled.section`
     max-width: 400px;
     width: 100%;
+    height: 68px;
     margin: 0 auto;
+    padding-bottom: 11px;
+    display: flex;
+    align-items: flex-end;
+
+    font-size: 22.976px;
+    line-height: 29px;
+    color: var(--darkBlue);
 `;
 const StyledCalendar = styled(Calendar)`
     max-width: 400px;
@@ -82,14 +97,20 @@ const StyledCalendar = styled(Calendar)`
     border-radius: 10px;
     & .red {
         &:enabled {
-            background: red;
+            background: var(--calendarRed);
             clip-path: circle(32%);
         }
     }
     & .green {
         &:enabled {
-            background: green;
+            background: var(--calendarGreen);
             clip-path: circle(32%);
+        }
+    }
+    & .all {
+        &:enabled {
+            width: 100%;
+            aspect-ratio: 1 / 1.087;
         }
     }
 `;
