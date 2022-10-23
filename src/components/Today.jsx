@@ -1,17 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import LoginContext from "./LoginContext";
 import dayjs from "dayjs";
 import TodayHabitCard from "./TodayHabitCard";
 import "dayjs/locale/pt-br";
+import LoadingPage from "./LoadingPage";
 
-export default function Habits({ todayHabitsDone, setTodayHabitsDone }) {
+export default function Habits({ token, todayHabitsDone, setTodayHabitsDone }) {
     const [todayHabits, setTodayHabits] = useState(null);
     const [refreshHabits, setRefreshHabits] = useState(false);
-    const {
-        loginData: { token },
-    } = useContext(LoginContext);
 
     useEffect(() => {
         if (todayHabits) {
@@ -22,6 +19,7 @@ export default function Habits({ todayHabitsDone, setTodayHabitsDone }) {
             setTodayHabitsDone(((completed / todayHabits.length) * 100).toFixed());
         }
     }, [todayHabits]);
+
     useEffect(() => {
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
         const config = {
@@ -35,7 +33,7 @@ export default function Habits({ todayHabitsDone, setTodayHabitsDone }) {
             .catch((error) => alert(error));
     }, [refreshHabits]);
     if (todayHabits === null) {
-        return;
+        return <LoadingPage />;
     }
 
     function hasHabitsOnTheServer() {

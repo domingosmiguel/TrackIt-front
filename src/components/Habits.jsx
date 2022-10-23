@@ -1,19 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import HabitCard from "./HabitCard";
 import NewHabitCard from "./NewHabitCard";
 import StyledButton from "./StyledButton";
 import axios from "axios";
-import LoginContext from "./LoginContext";
+import LoadingPage from "./LoadingPage";
 
-export default function Habits() {
+export default function Habits({ token }) {
     const [addNewHabit, setAddNewHabit] = useState(false);
     const [userHabits, setUserHabits] = useState(null);
     const [newHabit, setNewHabit] = useState({ name: "", days: [] });
-
-    const {
-        loginData: { token },
-    } = useContext(LoginContext);
 
     useEffect(() => {
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
@@ -28,7 +24,7 @@ export default function Habits() {
             .catch((error) => alert(error));
     }, []);
     if (userHabits === null) {
-        return;
+        return <LoadingPage />;
     }
 
     function hasHabitsOnTheServer() {

@@ -1,18 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import LoginContext from "./LoginContext";
 import dayjs from "dayjs";
 import Calendar from "react-calendar";
+import LoadingPage from "./LoadingPage";
 
 const TODAY = dayjs(new Date()).format("DD/MM/YYYY");
 
-export default function History() {
+export default function History({ token }) {
     const [selectDate, setSelectDate] = useState();
     const [historyData, setHistoryData] = useState(null);
-    const {
-        loginData: { token },
-    } = useContext(LoginContext);
 
     useEffect(() => {
         const url =
@@ -28,7 +25,7 @@ export default function History() {
             .catch((error) => alert(error));
     }, []);
     if (historyData === null) {
-        return;
+        return <LoadingPage />;
     }
 
     function highlightDays(activeStartDate, date) {
