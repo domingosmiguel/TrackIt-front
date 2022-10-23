@@ -11,27 +11,29 @@ export default function Habits({ token, todayHabitsDone, setTodayHabitsDone }) {
     const [refreshHabits, setRefreshHabits] = useState(false);
 
     useEffect(() => {
-        if (todayHabits) {
+        if (todayHabits && token) {
             const completed = todayHabits.reduce(
                 (acc, habit) => (habit.done === true ? ++acc : acc),
                 0
             );
             setTodayHabitsDone(((completed / todayHabits.length) * 100).toFixed());
         }
-    }, [todayHabits]);
+    }, [todayHabits, setTodayHabitsDone, token]);
 
     useEffect(() => {
-        const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        axios
-            .get(url, config)
-            .then((response) => setTodayHabits(response.data))
-            .catch((error) => alert(error));
-    }, [refreshHabits]);
+        if (token) {
+            const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            axios
+                .get(url, config)
+                .then((response) => setTodayHabits(response.data))
+                .catch((error) => alert(error));
+        }
+    }, [refreshHabits, token]);
     if (todayHabits === null) {
         return <LoadingPage />;
     }

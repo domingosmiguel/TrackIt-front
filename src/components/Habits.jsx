@@ -12,17 +12,19 @@ export default function Habits({ token }) {
     const [newHabit, setNewHabit] = useState({ name: "", days: [] });
 
     useEffect(() => {
-        const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        axios
-            .get(url, config)
-            .then((response) => setUserHabits(response.data))
-            .catch((error) => alert(error));
-    }, []);
+        if (token) {
+            const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            axios
+                .get(url, config)
+                .then((response) => setUserHabits(response.data))
+                .catch((error) => alert(error));
+        }
+    }, [token]);
     if (userHabits === null) {
         return <LoadingPage />;
     }

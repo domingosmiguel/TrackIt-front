@@ -12,18 +12,20 @@ export default function History({ token }) {
     const [historyData, setHistoryData] = useState(null);
 
     useEffect(() => {
-        const url =
-            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/history/daily";
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        axios
-            .get(url, config)
-            .then((response) => setHistoryData(response.data))
-            .catch((error) => alert(error));
-    }, []);
+        if (token) {
+            const url =
+                "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/history/daily";
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            axios
+                .get(url, config)
+                .then((response) => setHistoryData(response.data))
+                .catch((error) => alert(error));
+        }
+    }, [token]);
     if (historyData === null) {
         return <LoadingPage />;
     }
