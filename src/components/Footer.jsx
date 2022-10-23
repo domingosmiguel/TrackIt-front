@@ -63,6 +63,10 @@ const NavContainerFooter = styled.nav`
     align-items: center;
 
     position: relative;
+
+    @media screen and (max-width: 370px) {
+        padding: 0 0;
+    }
 `;
 const MiddleButtonContainer = styled.div`
     width: 91px;

@@ -10,6 +10,7 @@ const TODAY = dayjs(new Date()).format("DD/MM/YYYY");
 export default function History() {
     const [selectDate, setSelectDate] = useState();
     const [historyData, setHistoryData] = useState(null);
+    console.log("🚀 ~ file: History.jsx ~ line 13 ~ History ~ historyData", historyData);
     const {
         loginData: { token },
     } = useContext(LoginContext);

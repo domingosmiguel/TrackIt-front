@@ -11,6 +11,7 @@ import { useState } from "react";
 export default function LoggedPage({ loginData }) {
     const [todayHabitsDone, setTodayHabitsDone] = useState(null);
     const { route } = useParams();
+
     if (loginData === null) {
         return (
             <>
@@ -33,7 +34,7 @@ export default function LoggedPage({ loginData }) {
             case "historico":
                 return <History />;
             default:
-                return <PageNotFound />;
+                return <PageNotFound route={route} />;
         }
     }
     return (

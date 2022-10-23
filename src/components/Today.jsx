@@ -107,6 +107,3 @@ const HabitsSection = styled.section`
     max-width: 1200px;
     width: 100%;
 `;
-const UserHabitsHeader = styled.header`
-    margin: 29px auto 0;
-`;

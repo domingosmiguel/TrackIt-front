@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import HabitCard from "./HabitCard";
 import NewHabitCard from "./NewHabitCard";
-import StyledButton, { ButtonStyle } from "./StyledButton";
+import StyledButton from "./StyledButton";
 import axios from "axios";
 import LoginContext from "./LoginContext";
 

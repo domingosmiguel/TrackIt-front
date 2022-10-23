@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import Day from "./Day";
 import LoginContext from "./LoginContext";
-import StyledButton, { ButtonStyle } from "./StyledButton";
+import StyledButton from "./StyledButton";
 import StyledInput from "./StyledInput";
 
 export default function NewHabitCard({
