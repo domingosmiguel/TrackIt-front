@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import Div100vh from "react-div-100vh";
 
 import trackItLogo from "../images/trackit.PNG";
 import StyledButton from "./StyledButton";
@@ -79,7 +80,7 @@ export default function Registration() {
         </Main>
     );
 }
-const Main = styled.main`
+const Main = styled(Div100vh)`
     display: flex;
     flex-direction: column;
     align-items: center;

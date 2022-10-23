@@ -7,10 +7,14 @@ import History from "./History";
 import PageNotFound from "./PageNotFound";
 import Today from "./Today";
 import { useState } from "react";
+import { use100vh } from "react-div-100vh";
 
 export default function LoggedPage({ loginData }) {
     const [todayHabitsDone, setTodayHabitsDone] = useState(null);
     const { route } = useParams();
+
+    const height = use100vh();
+    const customHeight = height ? height - 140 + "px" : "calc(100vh - 140px)";
 
     function routeDecision() {
         switch (route) {
@@ -33,7 +37,7 @@ export default function LoggedPage({ loginData }) {
     return (
         <>
             <Header userImage={loginData && loginData.image} />
-            <LoggedMain>{routeDecision()}</LoggedMain>
+            <LoggedMain customHeight={customHeight}>{routeDecision()}</LoggedMain>
             <Footer percentage={todayHabitsDone} />
         </>
     );
@@ -41,8 +45,7 @@ export default function LoggedPage({ loginData }) {
 
 const LoggedMain = styled.main`
     max-width: 100vw;
-    height: calc(100vh - 140px);
-    height: calc((var(--vh, 1vh) * 100 - 140px));
+    height: ${({ customHeight }) => customHeight};
     position: relative;
     top: 70px;
     overflow-y: scroll;

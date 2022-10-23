@@ -42,4 +42,5 @@ const ImageContainer = styled.img`
     width: 51px;
     height: 51px;
     border-radius: 25.5px;
+    object-fit: cover;
 `;

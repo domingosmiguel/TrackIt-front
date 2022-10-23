@@ -4,12 +4,14 @@ import axios from "axios";
 import dayjs from "dayjs";
 import Calendar from "react-calendar";
 import LoadingPage from "./LoadingPage";
+import Modal from "./Modal";
 
 const TODAY = dayjs(new Date()).format("DD/MM/YYYY");
 
 export default function History({ token }) {
-    const [selectDate, setSelectDate] = useState();
+    const [selectDayData, setSelectDayData] = useState();
     const [historyData, setHistoryData] = useState(null);
+    const [showDetails, setShowDetails] = useState(false);
 
     useEffect(() => {
         if (token) {
@@ -51,20 +53,43 @@ export default function History({ token }) {
         return "all";
     }
     function handleClickDay(value, event) {
-        console.log("clicou");
+        event.preventDefault();
+        const day = dayjs(value).locale("pt-br");
+        const clickedDay = day.format("DD/MM/YYYY");
+        const dayIndex = historyData.findIndex((data) => data.day === clickedDay);
+        if (dayIndex !== -1) {
+            const weekday = day.format("dddd").split("-")[0];
+            const weekdayUppercase = weekday[0].toUpperCase() + weekday.substring(1);
+            const month = day.format("MMMM");
+            const monthUppercase = month[0].toUpperCase() + month.substring(1);
+            setSelectDayData({
+                habits: historyData[dayIndex].habits,
+                day: `${weekdayUppercase + day.format(", D")} de ${monthUppercase} de ${day.format(
+                    "YYYY"
+                )}`,
+            });
+            setShowDetails(true);
+        }
     }
     return (
         <HabitsMain>
             <HabitsHeader>Histórico</HabitsHeader>
             <StyledCalendar
-                value={selectDate}
-                onChange={setSelectDate}
                 locale="pt-br"
                 calendarType="US"
                 formatDay={(locale, date) => dayjs(date).format("DD")}
                 tileClassName={({ activeStartDate, date }) => highlightDays(activeStartDate, date)}
                 onClickDay={(value, event) => handleClickDay(value, event)}
             />
+            {selectDayData && (
+                <Modal
+                    showModal={showDetails}
+                    setShowModal={setShowDetails}
+                    data={selectDayData.habits}
+                >
+                    {selectDayData.day}
+                </Modal>
+            )}
         </HabitsMain>
     );
 }
