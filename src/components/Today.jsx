@@ -56,7 +56,7 @@ export default function Habits({ todayHabitsDone, setTodayHabitsDone }) {
     }
     function subtitle() {
         if (todayHabits.length === 0) {
-            return `Nenhum hábito hoje, vá para a aba "Hábitos" para adicionar um novo hábito`;
+            return `Não há nada aqui! Clique no botão "Hábitos" e adicione um novo hábito.`;
         }
         return todayHabitsDone > 0
             ? `${todayHabitsDone}% dos hábitos concluídos`

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 import Day from "./Day";
 import LoginContext from "./LoginContext";
 import StyledButton from "./StyledButton";
@@ -93,37 +93,6 @@ export default function NewHabitCard({
         </Card>
     );
 }
-
-const ScaleOutTop = keyframes`
-    0% {
-    transform: scaleY(1);
-    transform-origin: 100% 0%;
-    opacity: 1;
-    }
-    100% {
-        transform: scaleY(0);
-        transform-origin: 100% 0%;
-        opacity: 1;
-    }
-`;
-const ScaleInTop = keyframes`
-    0% {
-    transform: scaleY(0);
-    transform-origin: 100% 0%;
-    opacity: 1;
-    }
-    100% {
-        transform: scaleY(1);
-        transform-origin: 100% 0%;
-        opacity: 1;
-    }
-`;
-const AnimationIn = css`
-    animation: ${ScaleInTop} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-`;
-const AnimationOut = css`
-    animation: ${ScaleOutTop} 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-`;
 const Card = styled.section`
     max-width: 400px;
     width: 100%;
@@ -136,8 +105,6 @@ const Card = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    ${({ visible }) => (visible ? AnimationIn : AnimationOut)};
 `;
 const DataContainer = styled.div``;
 const DaysContainer = styled.div`

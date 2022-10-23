@@ -10,7 +10,6 @@ const TODAY = dayjs(new Date()).format("DD/MM/YYYY");
 export default function History() {
     const [selectDate, setSelectDate] = useState();
     const [historyData, setHistoryData] = useState(null);
-    console.log("🚀 ~ file: History.jsx ~ line 13 ~ History ~ historyData", historyData);
     const {
         loginData: { token },
     } = useContext(LoginContext);
@@ -53,8 +52,6 @@ export default function History() {
         return "all";
     }
     function handleClickDay(value, event) {
-        console.log("🚀 ~ file: History.jsx ~ line 53 ~ handleClickDay ~ value", value);
-        console.log("🚀 ~ file: History.jsx ~ line 53 ~ handleClickDay ~ event", event);
         console.log("clicou");
     }
     return (

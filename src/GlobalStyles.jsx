@@ -18,9 +18,9 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Lexend Deca', sans-serif;
 	    font-weight: 400;
         
-        /* ::-webkit-scrollbar {
+        ::-webkit-scrollbar {
             display: none;
-        }         */
+        }        
         // reset
         html, body, div, span, applet, object, iframe,
         h1, h2, h3, h4, h5, h6, p, blockquote, pre,
