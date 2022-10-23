@@ -24,7 +24,7 @@ export default function TodayHabitCard({
         axios
             .post(url, {}, config)
             .then(() => setRefreshHabits(!refreshHabits))
-            .catch((error) => alert(error));
+            .catch((error) => alert(error.response.data.message));
     }
     return (
         <Card disabled={disabled}>

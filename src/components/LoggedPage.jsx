@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useState } from "react";
 import styled from "styled-components";
 import Footer from "./Footer";
 import Habits from "./Habits";
@@ -6,7 +7,6 @@ import Header from "./Header";
 import History from "./History";
 import PageNotFound from "./PageNotFound";
 import Today from "./Today";
-import { useState } from "react";
 import { use100vh } from "react-div-100vh";
 
 export default function LoggedPage({ loginData }) {

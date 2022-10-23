@@ -1,12 +1,12 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Day from "./Day";
-import LoginContext from "./LoginContext";
 import StyledButton from "./StyledButton";
 import StyledInput from "./StyledInput";
 
 export default function NewHabitCard({
+    token,
     newHabit,
     setNewHabit,
     addNewHabit,
@@ -14,9 +14,6 @@ export default function NewHabitCard({
     userHabits,
     setUserHabits,
 }) {
-    const {
-        loginData: { token },
-    } = useContext(LoginContext);
     const [loading, setLoading] = useState(false);
     const arrayOfDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
@@ -27,7 +24,7 @@ export default function NewHabitCard({
         setLoading(false);
     }
     function newHabitFail(error) {
-        alert(error);
+        alert(error.response.data.message);
         setLoading(false);
     }
     function handleSave() {

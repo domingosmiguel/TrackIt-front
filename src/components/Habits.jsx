@@ -22,7 +22,7 @@ export default function Habits({ token }) {
             axios
                 .get(url, config)
                 .then((response) => setUserHabits(response.data))
-                .catch((error) => alert(error));
+                .catch((error) => alert(error.response.data.message));
         }
     }, [token]);
     if (userHabits === null) {
@@ -66,6 +66,7 @@ export default function Habits({ token }) {
             </HabitsHeader>
             {addNewHabit && (
                 <NewHabitCard
+                    token={token}
                     newHabit={newHabit}
                     setNewHabit={setNewHabit}
                     addNewHabit={addNewHabit}

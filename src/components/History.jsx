@@ -25,7 +25,7 @@ export default function History({ token }) {
             axios
                 .get(url, config)
                 .then((response) => setHistoryData(response.data))
-                .catch((error) => alert(error));
+                .catch((error) => alert(error.response.data.message));
         }
     }, [token]);
     if (historyData === null) {

@@ -20,7 +20,7 @@ export default function HabitCard({ children, id, days, token, userHabits, setUs
         axios
             .delete(url, config)
             .then(deletionSuccess)
-            .catch((error) => alert(error));
+            .catch((error) => alert(error.response.data.message));
     }
     function handleDeletionClick() {
         if (window.confirm("sure you wanna delete this habit track?")) {

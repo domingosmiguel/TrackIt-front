@@ -22,7 +22,7 @@ export default function Registration() {
         setRegister({ ...register, [e.target.name]: e.target.value });
     }
     function failedRegistration(error) {
-        alert(error);
+        alert(error.response.data.message);
         setLoading(false);
     }
     function handleButtonClick(e) {

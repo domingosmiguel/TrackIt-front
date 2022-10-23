@@ -16,7 +16,7 @@ export default function Login({ loginData, setLoginData }) {
         password: "",
     });
     if (loginData !== null) {
-        navigate("/habitos");
+        navigate("/hoje");
     }
 
     function handleForm(e) {
@@ -31,7 +31,7 @@ export default function Login({ loginData, setLoginData }) {
         navigate("/hoje");
     }
     function failedLogin(error) {
-        alert(error);
+        alert(error.response.data.message);
         setLoading(false);
     }
     function handleButtonClick(e) {

@@ -31,7 +31,7 @@ export default function Habits({ token, todayHabitsDone, setTodayHabitsDone }) {
             axios
                 .get(url, config)
                 .then((response) => setTodayHabits(response.data))
-                .catch((error) => alert(error));
+                .catch((error) => alert(error.response.data.message));
         }
     }, [refreshHabits, token]);
     if (todayHabits === null) {
