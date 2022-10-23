@@ -3,8 +3,6 @@ import { use100vh } from "react-div-100vh";
 import TodayHabitCard from "./TodayHabitCard";
 
 export default function Modal({ children, showModal, setShowModal, data }) {
-    console.log("🚀 ~ file: Modal.jsx ~ line 5 ~ Modal ~ data", data);
-
     const height = use100vh();
     const customHeight = height ? height - 140 + "px" : "calc(100vh - 140px)";
 
@@ -52,10 +50,14 @@ const ModalStyle = styled.section`
     line-height: 29px;
 `;
 const ModalHeader = styled.header`
-    color: var(--darkGray);
+    color: var(--midGray);
     margin-bottom: 5px;
+    font-size: 17.976px;
+    line-height: 22px;
 
     :first-child {
         color: var(--darkBlue);
+        font-size: 22.976px;
+        line-height: 29px;
     }
 `;
