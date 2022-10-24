@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Div100vh from "react-div-100vh";
 
 import trackItLogo from "../images/trackit.PNG";
@@ -89,8 +89,12 @@ const InputContainer = styled.form`
     max-width: 303px;
     width: 100%;
 `;
+const DisabledLink = css`
+    pointer-events: none;
+    opacity: 0.7;
+`;
 const StyledLink = styled(Link)`
-    pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+    ${({ disabled }) => disabled && DisabledLink};
     text-align: center;
     color: var(--blue);
     cursor: pointer;
@@ -99,7 +103,7 @@ const StyledLink = styled(Link)`
     font-size: 13.976px;
     line-height: 17px;
 
-    :hover {
+    &:hover {
         transform: scale(1.02);
     }
 `;

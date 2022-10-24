@@ -53,5 +53,7 @@ const InputStyle = styled.input`
         }
     }
     &:disabled {
+        background-color: var(--lightGray);
+        opacity: 0.7;
     }
 `;

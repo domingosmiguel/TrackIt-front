@@ -54,7 +54,6 @@ const FreeSize = css`
     height: 35px;
     padding: 0 17px;
 `;
-
 const ButtonStyle = styled.button`
     pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
@@ -69,4 +68,8 @@ const ButtonStyle = styled.button`
     ${({ invertColor }) => (invertColor ? InvertedColor : NormalColor)};
     ${({ freeButtonSize }) => (freeButtonSize ? FreeSize : NormalSize)};
     ${({ fontSize }) => fontSize};
+
+    &:disabled {
+        opacity: 0.7;
+    }
 `;
