@@ -37,11 +37,11 @@ const ModalBackground = styled.section`
     z-index: 2;
     display: flex;
     justify-content: center;
-    align-items: center;
 `;
 const ModalStyle = styled.section`
     max-width: 436px;
     width: 100%;
+    height: fit-content;
     background-color: white;
     padding: 18px;
     border-radius: 10px;
