@@ -34,7 +34,7 @@ export default function Login({ loginData, setLoginData }) {
         alert(error.response.data.message);
         setLoading(false);
     }
-    function handleButtonClick(e) {
+    function handleFormSubmit(e) {
         e.preventDefault();
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
         setLoading(true);
@@ -43,7 +43,7 @@ export default function Login({ loginData, setLoginData }) {
     return (
         <Main>
             <LogoContainer src={trackItLogo} alt="logo" />
-            <InputContainer>
+            <InputContainer onSubmit={handleFormSubmit}>
                 <StyledInput
                     name="email"
                     disabled={loading}
@@ -61,7 +61,7 @@ export default function Login({ loginData, setLoginData }) {
                     placeHolder="senha"
                 />
 
-                <StyledButton loading={loading} type="submit" onClick={handleButtonClick}>
+                <StyledButton loading={loading} type="submit">
                     Entrar
                 </StyledButton>
                 <StyledLink disabled={loading} to="/cadastro">

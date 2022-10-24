@@ -25,7 +25,7 @@ export default function Registration() {
         alert(error.response.data.message);
         setLoading(false);
     }
-    function handleButtonClick(e) {
+    function handleFormSubmit(e) {
         e.preventDefault();
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
         setLoading(true);
@@ -37,7 +37,7 @@ export default function Registration() {
     return (
         <Main>
             <LogoContainer src={trackItLogo} alt="logo" />
-            <InputContainer>
+            <InputContainer onSubmit={handleFormSubmit}>
                 <StyledInput
                     name="email"
                     disabled={loading}
@@ -70,7 +70,7 @@ export default function Registration() {
                     onChange={handleForm}
                     placeHolder="foto"
                 />
-                <StyledButton loading={loading} type="submit" onClick={handleButtonClick}>
+                <StyledButton loading={loading} type="submit">
                     Cadastrar
                 </StyledButton>
                 <StyledLink disabled={loading} to="/">

@@ -9,6 +9,7 @@ export default function StyledInput({ name, disabled, type, value, onChange, pla
             value={value}
             onChange={onChange}
             placeholder={placeHolder}
+            required
         />
     );
 }
