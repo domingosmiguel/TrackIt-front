@@ -11,14 +11,14 @@ export default function Habits({ token, todayHabitsDone, setTodayHabitsDone }) {
     const [refreshHabits, setRefreshHabits] = useState(false);
 
     useEffect(() => {
-        if (todayHabits && token) {
+        if (todayHabits) {
             const completed = todayHabits.reduce(
                 (acc, habit) => (habit.done === true ? ++acc : acc),
                 0
             );
             setTodayHabitsDone(((completed / todayHabits.length) * 100).toFixed());
         }
-    }, [todayHabits, setTodayHabitsDone, token]);
+    }, [todayHabits, setTodayHabitsDone]);
 
     useEffect(() => {
         if (token) {
@@ -70,8 +70,8 @@ export default function Habits({ token, todayHabitsDone, setTodayHabitsDone }) {
     return (
         <HabitsMain>
             <HabitsHeader>
-                <TodayTime>{dayOfTheWeek()}</TodayTime>
-                <PercentageOfHabits changeColor={todayHabitsDone > 0}>
+                <TodayTime data-identifier="today-infos">{dayOfTheWeek()}</TodayTime>
+                <PercentageOfHabits data-identifier="today-infos" changeColor={todayHabitsDone > 0}>
                     {subtitle()}
                 </PercentageOfHabits>
             </HabitsHeader>

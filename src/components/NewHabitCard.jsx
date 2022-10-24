@@ -46,6 +46,7 @@ export default function NewHabitCard({
         <Card visible={addNewHabit}>
             <DataContainer>
                 <StyledInput
+                    identifier="input-habit-name"
                     name="name"
                     disabled={loading}
                     type="text"
@@ -56,6 +57,7 @@ export default function NewHabitCard({
                 <DaysContainer>
                     {arrayOfDays.map((day, index) => (
                         <Day
+                            identifier="week-day-btn"
                             key={index}
                             disabled={loading}
                             name="days"
@@ -70,6 +72,7 @@ export default function NewHabitCard({
             </DataContainer>
             <ButtonsContainer>
                 <StyledButton
+                    identifier="cancel-habit-create-btn"
                     disabled={loading}
                     invertColor={true}
                     freeButtonSize={true}
@@ -79,6 +82,7 @@ export default function NewHabitCard({
                     Cancelar
                 </StyledButton>
                 <StyledButton
+                    identifier="save-habit-create-btn"
                     loading={loading}
                     freeButtonSize={true}
                     onClick={handleSave}

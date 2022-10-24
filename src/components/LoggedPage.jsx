@@ -1,5 +1,5 @@
-import { useParams } from "react-router";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "./Footer";
 import Habits from "./Habits";
@@ -11,7 +11,16 @@ import { use100vh } from "react-div-100vh";
 
 export default function LoggedPage({ loginData }) {
     const [todayHabitsDone, setTodayHabitsDone] = useState(null);
+    const navigate = useNavigate();
     const { route } = useParams();
+
+    useEffect(() => {
+        const serializedOldLoginData = localStorage.getItem("loginData");
+        if (serializedOldLoginData === null) {
+            navigate("/");
+            return;
+        }
+    }, [navigate]);
 
     const height = use100vh();
     const customHeight = height ? height - 140 + "px" : "calc(100vh - 140px)";

@@ -10,8 +10,6 @@ export default function LoadingPage() {
                 radius="48"
                 color="var(--midGray)"
                 ariaLabel="watch-loading"
-                wrapperStyle={{}}
-                wrapperClassName=""
                 visible={true}
             />
         </LoadingMain>

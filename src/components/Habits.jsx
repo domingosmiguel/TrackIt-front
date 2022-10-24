@@ -32,7 +32,7 @@ export default function Habits({ token }) {
     function hasHabitsOnTheServer() {
         if (userHabits.length === 0) {
             return (
-                <UserHabitsHeader>
+                <UserHabitsHeader identifier="no-habit-message">
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a
                     trackear!
                 </UserHabitsHeader>
@@ -57,6 +57,7 @@ export default function Habits({ token }) {
             <HabitsHeader>
                 Meus hábitos
                 <StyledButton
+                    identifier="create-habit-btn"
                     onClick={() => setAddNewHabit(!addNewHabit)}
                     freeButtonSize={true}
                     fontSize={`font-size: 26.976px; line-height: 34px;`}

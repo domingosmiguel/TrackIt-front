@@ -39,6 +39,7 @@ export default function Registration() {
             <LogoContainer src={trackItLogo} alt="logo" />
             <InputContainer onSubmit={handleFormSubmit}>
                 <StyledInput
+                    identifier="input-email"
                     name="email"
                     disabled={loading}
                     type="email"
@@ -47,6 +48,7 @@ export default function Registration() {
                     placeHolder="email"
                 />
                 <StyledInput
+                    identifier="input-password"
                     name="password"
                     disabled={loading}
                     type="password"
@@ -55,6 +57,7 @@ export default function Registration() {
                     placeHolder="senha"
                 />
                 <StyledInput
+                    identifier="input-name"
                     name="name"
                     disabled={loading}
                     type="text"
@@ -63,6 +66,7 @@ export default function Registration() {
                     placeHolder="nome"
                 />
                 <StyledInput
+                    identifier="input-photo"
                     name="image"
                     disabled={loading}
                     type="url"
@@ -73,7 +77,7 @@ export default function Registration() {
                 <StyledButton loading={loading} type="submit">
                     Cadastrar
                 </StyledButton>
-                <StyledLink disabled={loading} to="/">
+                <StyledLink identifier="back-to-login-action" disabled={loading} to="/">
                     Já tem uma conta? Faça login!
                 </StyledLink>
             </InputContainer>
@@ -109,4 +113,8 @@ const StyledLink = styled(Link)`
 
     font-size: 13.976px;
     line-height: 17px;
+
+    :hover {
+        transform: scale(1.02);
+    }
 `;

@@ -10,6 +10,7 @@ export default function Footer({ percentage }) {
         <FooterContainer>
             <NavContainerFooter>
                 <StyledButton
+                    identifier="habit-page-action"
                     invertColor={true}
                     freeButtonSize={true}
                     onClick={() => navigate("/habitos")}
@@ -32,6 +33,7 @@ export default function Footer({ percentage }) {
                     />
                 </MiddleButtonContainer>
                 <StyledButton
+                    identifier="historic-page-action"
                     invertColor={true}
                     freeButtonSize={true}
                     onClick={() => navigate("/historico")}

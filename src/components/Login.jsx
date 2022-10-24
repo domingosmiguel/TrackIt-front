@@ -45,6 +45,7 @@ export default function Login({ loginData, setLoginData }) {
             <LogoContainer src={trackItLogo} alt="logo" />
             <InputContainer onSubmit={handleFormSubmit}>
                 <StyledInput
+                    identifier="input-email"
                     name="email"
                     disabled={loading}
                     type="email"
@@ -53,6 +54,7 @@ export default function Login({ loginData, setLoginData }) {
                     placeHolder="email"
                 />
                 <StyledInput
+                    identifier="input-password"
                     name="password"
                     disabled={loading}
                     type="password"
@@ -61,10 +63,10 @@ export default function Login({ loginData, setLoginData }) {
                     placeHolder="senha"
                 />
 
-                <StyledButton loading={loading} type="submit">
+                <StyledButton identifier="login-btn" loading={loading} type="submit">
                     Entrar
                 </StyledButton>
-                <StyledLink disabled={loading} to="/cadastro">
+                <StyledLink identifier="sign-up-action" disabled={loading} to="/cadastro">
                     Não tem uma conta? Cadastre-se
                 </StyledLink>
             </InputContainer>
@@ -96,4 +98,8 @@ const StyledLink = styled(Link)`
 
     font-size: 13.976px;
     line-height: 17px;
+
+    :hover {
+        transform: scale(1.02);
+    }
 `;

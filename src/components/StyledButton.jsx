@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 
 export default function StyledButton({
+    identifier,
     children,
     disabled = false,
     loading = false,
@@ -13,6 +14,7 @@ export default function StyledButton({
 }) {
     return (
         <ButtonStyle
+            data-identifier={identifier}
             disabled={disabled || loading}
             type={type}
             onClick={onClick}
@@ -27,8 +29,6 @@ export default function StyledButton({
                     radius="9"
                     color="white"
                     ariaLabel="three-dots-loading"
-                    wrapperStyle={{}}
-                    wrapperClassName=""
                     visible={true}
                 />
             ) : (

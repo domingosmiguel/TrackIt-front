@@ -1,8 +1,17 @@
 import styled from "styled-components";
 
-export default function StyledInput({ name, disabled, type, value, onChange, placeHolder }) {
+export default function StyledInput({
+    identifier,
+    name,
+    disabled,
+    type,
+    value,
+    onChange,
+    placeHolder,
+}) {
     return (
         <InputStyle
+            data-identifier={identifier}
             name={name}
             disabled={disabled}
             type={type}
@@ -39,5 +48,10 @@ const InputStyle = styled.input`
 
     &:focus {
         outline-color: var(--darkGray);
+        ::placeholder {
+            color: transparent;
+        }
+    }
+    &:disabled {
     }
 `;

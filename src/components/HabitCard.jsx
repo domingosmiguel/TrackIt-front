@@ -30,7 +30,7 @@ export default function HabitCard({ children, id, days, token, userHabits, setUs
     return (
         <Card>
             <DataContainer>
-                <TitleContainer>{children}</TitleContainer>
+                <TitleContainer data-identifier="habit-name">{children}</TitleContainer>
                 <DaysContainer>
                     {arrayOfDays.map((day, index) => (
                         <Day
@@ -44,7 +44,11 @@ export default function HabitCard({ children, id, days, token, userHabits, setUs
                     ))}
                 </DaysContainer>
             </DataContainer>
-            <DeleteButton src={Delete} onClick={handleDeletionClick} />
+            <DeleteButton
+                data-identifier="delete-habit-btn"
+                src={Delete}
+                onClick={handleDeletionClick}
+            />
         </Card>
     );
 }

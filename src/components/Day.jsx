@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 export default function Day({
+    identifier,
     children,
     disabled = false,
     name,
@@ -21,9 +22,10 @@ export default function Day({
     }
     return (
         <DayStyle
+            data-identifier={identifier}
             disabled={disabled}
             name={name}
-            selected={(selected && disabled) || daysOfTheWeek.indexOf(numberOfTheDay) !== -1}
+            selected={selected || daysOfTheWeek.indexOf(numberOfTheDay) !== -1}
             onClick={handleClick}
         >
             {children}

@@ -6,7 +6,7 @@ export default function Header({ userImage }) {
         <HeaderContainer>
             <NavContainerHeader>
                 TrackIt
-                <ImageContainer src={userImage || DefaultImage} />
+                <ImageContainer data-identifier="avatar" src={userImage || DefaultImage} />
             </NavContainerHeader>
         </HeaderContainer>
     );

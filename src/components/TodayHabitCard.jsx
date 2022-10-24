@@ -27,7 +27,7 @@ export default function TodayHabitCard({
             .catch((error) => alert(error.response.data.message));
     }
     return (
-        <Card disabled={disabled}>
+        <Card data-identifier="today-infos" disabled={disabled}>
             <DataContainer>
                 <TitleContainer>
                     {typeof children[1] === "number" ? children[0] : children}
@@ -51,7 +51,11 @@ export default function TodayHabitCard({
                     </>
                 )}
             </DataContainer>
-            <CheckButton done={`${done}`} onClick={handleCheckClick} />
+            <CheckButton
+                data-identifier="done-habit-btn"
+                done={`${done}`}
+                onClick={handleCheckClick}
+            />
         </Card>
     );
 }
