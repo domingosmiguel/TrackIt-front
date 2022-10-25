@@ -1,54 +1,17 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import dayjs from "dayjs";
 import TodayHabitCard from "./TodayHabitCard";
 import "dayjs/locale/pt-br";
 import LoadingPage from "./LoadingPage";
 
-export default function Habits({ token, todayHabitsDone, setTodayHabitsDone }) {
-    const [todayHabits, setTodayHabits] = useState(null);
-    const [refreshHabits, setRefreshHabits] = useState(false);
-
-    useEffect(() => {
-        if (todayHabits) {
-            const completed = todayHabits.reduce(
-                (acc, habit) => (habit.done === true ? ++acc : acc),
-                0
-            );
-            setTodayHabitsDone(((completed / todayHabits.length) * 100).toFixed());
-        }
-    }, [todayHabits, setTodayHabitsDone]);
-
-    useEffect(() => {
-        if (token) {
-            const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
-            axios
-                .get(url, config)
-                .then((response) => setTodayHabits(response.data))
-                .catch((error) => alert(error.response.data.message));
-        }
-    }, [refreshHabits, token]);
+export default function Habits({ token, todayHabits, todayHabitsDone }) {
     if (todayHabits === null) {
         return <LoadingPage />;
     }
-
     function hasHabitsOnTheServer() {
         if (todayHabits.length !== 0) {
             return todayHabits.map((habit) => (
-                <TodayHabitCard
-                    key={habit.id}
-                    id={habit.id}
-                    token={token}
-                    done={habit.done}
-                    refreshHabits={refreshHabits}
-                    setRefreshHabits={setRefreshHabits}
-                >
+                <TodayHabitCard key={habit.id} id={habit.id} token={token} done={habit.done}>
                     {[habit.name, habit.currentSequence, habit.highestSequence]}
                 </TodayHabitCard>
             ));

@@ -2,15 +2,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { BsCheckLg } from "react-icons/bs";
 
-export default function TodayHabitCard({
-    children,
-    id,
-    disabled = false,
-    token,
-    done,
-    refreshHabits,
-    setRefreshHabits,
-}) {
+export default function TodayHabitCard({ children, id, disabled = false, token, done }) {
     function handleCheckClick() {
         let url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
         if (done) {
@@ -23,7 +15,7 @@ export default function TodayHabitCard({
         };
         axios
             .post(url, {}, config)
-            .then(() => setRefreshHabits(!refreshHabits))
+            .then(() => (done = !done))
             .catch((error) => alert(error.response.data.message));
     }
     return (

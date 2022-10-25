@@ -10,6 +10,7 @@ import Today from "./Today";
 import { use100vh } from "react-div-100vh";
 
 export default function LoggedPage({ loginData }) {
+    const [todayHabits, setTodayHabits] = useState(null);
     const [todayHabitsDone, setTodayHabitsDone] = useState(null);
     const navigate = useNavigate();
     const { route } = useParams();
@@ -28,26 +29,32 @@ export default function LoggedPage({ loginData }) {
     function routeDecision() {
         switch (route) {
             case "habitos":
-                return <Habits token={loginData && loginData.token} />;
+                return <Habits token={loginData?.token} />;
             case "hoje":
                 return (
                     <Today
-                        token={loginData && loginData.token}
+                        token={loginData?.token}
+                        todayHabits={todayHabits}
                         todayHabitsDone={todayHabitsDone}
-                        setTodayHabitsDone={setTodayHabitsDone}
                     />
                 );
             case "historico":
-                return <History token={loginData && loginData.token} />;
+                return <History token={loginData?.token} />;
             default:
                 return <PageNotFound route={route} />;
         }
     }
     return (
         <>
-            <Header userImage={loginData && loginData.image} />
+            <Header userImage={loginData?.image} />
             <LoggedMain customHeight={customHeight}>{routeDecision()}</LoggedMain>
-            <Footer percentage={todayHabitsDone} />
+            <Footer
+                token={loginData?.token}
+                todayHabits={todayHabits}
+                setTodayHabits={setTodayHabits}
+                todayHabitsDone={todayHabitsDone}
+                setTodayHabitsDone={setTodayHabitsDone}
+            />
         </>
     );
 }
